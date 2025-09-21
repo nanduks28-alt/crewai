@@ -1,0 +1,89 @@
+identifier_task:
+  description: >
+    If the user input is a command, identify it as a command. 
+    If the user input is a query, identify it as a query about {topic}. 
+
+  expected_output: >
+    A boolean value: True if the input is a command, False if the input is a query
+  agent: identifier
+
+ai_assistant_task:
+  description: >
+    Act as an AI assistant that responds to user queries 
+    with detailed, informative answers.
+  expected_output: >
+    A spoken response suitable for text-to-speech output, 
+    using clear and natural language. 
+    Avoid technical jargon and ensure the answer is easy 
+    to understand when read aloud.
+  agent: ai_assistant
+
+rover_task:
+  description: >
+    Act as a rover that moves according to user commands. 
+    The rover can move forward, backward, right, or left 
+    for a specified distance. Interpret the user's movement 
+    command and provide output of the rover's movement, 
+    including the direction and distance traveled in meters.
+  expected_output: >
+    A dictionary where the key is the movement command 
+    (one of: front, back, right, left) and the value is 
+    the distance in meters as a number. 
+    For example: {"front": 5}
+  agent: rover_agent
+
+weather_task:
+  description: >
+    Provide the weather forecast for the user's current location or a specified location.
+    Include the following sections with appropriate headings for clarity:
+    - One-line summary of the weather
+    - Temperature (current, high, and low)
+    - Chance of rain (as a percentage)
+    - Humidity
+    - Wind speed and direction
+    - Any weather alerts or warnings
+  expected_output: >
+    {
+      "summary": "string (one-line summary of the weather)",
+      "temperature": {
+        "current": "number (current temperature in Celsius or Fahrenheit)",
+        "high": "number (high temperature)",
+        "low": "number (low temperature)"
+      },
+      "chance_of_rain": "number (percentage)",
+      "humidity": "number (percentage)",
+      "wind": {
+        "speed": "number (wind speed, e.g., km/h or mph)",
+        "direction": "string (wind direction, e.g., N, NE, SW)"
+      },
+      "alerts": [
+        "string (any weather alerts or warnings)"
+      ]
+    }
+  agent: weather_agent
+
+hotel_task:
+  description: >
+    Assist the user in finding and booking the cheapest and best hotels in a given location,
+    based on their preferences.
+    Provide a spoken-friendly summary suitable for text-to-speech
+    output, highlighting top hotel options, prices, and 
+    key features in clear, natural language.
+  expected_output: >
+    {
+      "summary": "string (one-line spoken-friendly summary of top hotel options)",
+      "hotels": [
+        {
+          "name": "string (hotel name)",
+          "price_per_night": "number (price in local currency)",
+          "rating": "number (hotel rating, e.g., 4.5)",
+          "features": [
+            "string (key feature, e.g., free Wi-Fi, breakfast included)"
+          ],
+          "location": "string (hotel location or address)",
+          "booking_link": "string (URL for booking, if available)"
+        }
+      ],
+      "recommendation": "string (spoken recommendation for the best option based on user preferences)"
+    }
+  agent: hotel_agent
